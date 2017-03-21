@@ -33,6 +33,12 @@ Write something kool here!
 
 ---
 
+## VMs VS Containers
+
+![](images/vms_vs_containers.png)
+
+---
+
 ## Next Slide
 
 Note:
