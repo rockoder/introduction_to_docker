@@ -35,7 +35,7 @@ Write something kool here!
 
 ## VMs VS Containers
 
-![](vms_vs_containers.png)
+![](my_slides/vms_vs_containers.png)
 
 ---
 
