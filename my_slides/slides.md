@@ -37,6 +37,12 @@ Write something kool here!
 
 ![](my_slides/vms_vs_containers.png)
 
+Note:
+- Both need host OS to run
+- VMs need hypervisor to run
+  - Type 1 - Run directly on the host
+  - Type 2 - Run on the OS
+  
 ---
 
 ## Next Slide
