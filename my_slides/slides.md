@@ -29,7 +29,7 @@ Write something kool here!
 
 -----
 
-## Can something kooler on vertical slide
+## And something kooler on vertical slide
 
 ---
 
