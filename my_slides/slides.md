@@ -4,6 +4,7 @@ Ganesh Pagade
 Mar 2017
 
 ---
+
 ## Overview
 1. OS Level Virtualization
 1. Docker Architecture
@@ -14,6 +15,8 @@ Mar 2017
 1. Docker Networking
 1. Docker Compose
 1. Docker Swarm
+
+---
 
 # Next Slide
 
