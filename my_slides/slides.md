@@ -16,6 +16,10 @@ Mar 2017
 1. Docker Networking
 1. Docker Compose
 1. Docker Swarm
+1. Reference Material
+
+Note:
+- Slides and other material used in this training is shared online.
 
 ---
 
