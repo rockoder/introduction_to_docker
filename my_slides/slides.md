@@ -40,7 +40,7 @@ Write something kool here!
 Note:
 - Both need host OS to run
 - VMs need hypervisor to run
-- Type 1 - Something
+  - Type 1 - Something
 
 ---
 
