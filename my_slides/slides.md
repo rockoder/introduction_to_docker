@@ -23,7 +23,17 @@ Note:
 
 ---
 
-# Next Slide
+## About Me
+
+Write something kool here!
+
+-----
+
+## Can something kooler on vertical slide
+
+---
+
+## Next Slide
 
 Note:
 - Presenter note
