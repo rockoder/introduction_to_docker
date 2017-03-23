@@ -41,7 +41,7 @@ Note:
 <img width="300" border="5" src="images/01-type2.png"> <!-- .element: class="fragment" data-fragment-index="2" -->
 
 - Type 1: ESXi, Xen   <!-- .element: class="fragment" data-fragment-index="3" -->
-- Type 2: VirtualBox, VMware Player <!-- .element: class="fragment" data-fragment-index="4" -->
+- Type 2: VirtualBox, VMware Workstation <!-- .element: class="fragment" data-fragment-index="4" -->
 
 Note:
 - To better utilize hardware
