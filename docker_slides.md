@@ -27,11 +27,11 @@ Note:
 
 ## About Me
 
-1. 12+ years in software engineering/architecture <!-- .element: class="fragment" data-fragment-index="1" -->
-1. Masters in CS from University of Pune <!-- .element: class="fragment" data-fragment-index="2" -->
-1. 1+ year in HPE - Cloud Optimizer <!-- .element: class="fragment" data-fragment-index="3" -->
-1. Interested in Distributed Computing, Microservices, Containers and DevOps <!-- .element: class="fragment" data-fragment-index="4" -->
-1. <!-- .element: class="fragment" data-fragment-index="5" --> [http://www.rockoder.com](http://www.rockoder.com)
+- 12+ years in software engineering/architecture <!-- .element: class="fragment" data-fragment-index="1" -->
+- Masters in CS from University of Pune <!-- .element: class="fragment" data-fragment-index="2" -->
+- 1+ year in HPE - Cloud Optimizer <!-- .element: class="fragment" data-fragment-index="3" -->
+- Interested in Distributed Computing, Microservices, Containers and DevOps <!-- .element: class="fragment" data-fragment-index="4" -->
+- <!-- .element: class="fragment" data-fragment-index="5" --> [http://www.rockoder.com](http://www.rockoder.com)
 
 ---
 
