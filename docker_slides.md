@@ -62,6 +62,8 @@ Note:
 
 <img width="800" src="images/03-container-in-vm.png">
 
+- Containers and VMs used together provide a great deal of flexibility in deploying and managing apps. <!-- .element: class="fragment" data-fragment-index="1" -->
+
 -----
 
 ### Virtual Machines vs Containers
