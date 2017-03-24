@@ -82,9 +82,50 @@ Note:
 
 ---
 
+## Docker Internals
+
+- chroot - changes current and root directory for a process <!-- .element: class="fragment" data-fragment-index="1" -->
+- namespaces - isolation of process tree, mounts, network, users, hostnames <!-- .element: class="fragment" data-fragment-index="2" -->
+- cgroups - isolates and limits resources like cpu, memory etc <!-- .element: class="fragment" data-fragment-index="3" -->
+
+- LXC - used by earlier Docker releases <!-- .element: class="fragment" data-fragment-index="4" -->
+- runC - Docker replaced LXC with runC <!-- .element: class="fragment" data-fragment-index="5" -->
+
+Note:
+  - OS Level Virtualization
+  - Control Groups
+  - LinuX Container
+
+---
+
+## So What is Docker?
+
+- Abstraction on container engine <!-- .element: class="fragment" data-fragment-index="1" -->
+- Command line and HTTP API <!-- .element: class="fragment" data-fragment-index="2" -->
+- Standardized packaging for app and libraries <!-- .element: class="fragment" data-fragment-index="3" -->
+- Layered image format <!-- .element: class="fragment" data-fragment-index="4" -->
+- Ecosystem of tools and services <!-- .element: class="fragment" data-fragment-index="5" -->
+- Software container platform <!-- .element: class="fragment" data-fragment-index="6" -->
+
+---
+
+## Why are containers so popular?
+
+- Dev, QA, Prod - Story of a SaaS based e-commerce portal
+- No more: "It works on my machine"
+- Immutable containers
+
+---
+
 ## Docker Installation
 
 ```bash
+# If you are behind proxy, set http_proxy and https_proxy
+# variables in /etc/environment file. Ex: add following
+# lines in the /etc/environment file:
+export http_proxy=http://web-proxy.in.hpecorp.net:8080
+export https_proxy=https://web-proxy.in.hpecorp.net:8080
+
 $ sudo apt-get update
 
 $ sudo apt-get install \
@@ -97,7 +138,7 @@ $ sudo apt-get install \
     curl \
     software-properties-common
 
-$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg \|
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg |
     sudo apt-key add -
 
 $ sudo apt-key fingerprint 0EBFCD88
@@ -106,6 +147,8 @@ $ sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
    $(lsb_release -cs) \
    stable"
+
+$ sudo apt-get update
 
 $ sudo apt-get install docker-ce
 ```
@@ -126,14 +169,12 @@ $ sudo usermod -aG docker $USER
 
 ---
 
-## Docker Containers
+## Demo - Docker Containers
 
 ```bash
-$ docker run ubuntu
+$ docker run alpine ls
 
-$ docker run ubuntu ls
-
-$ docker run -it ubuntu /bin/bash
+$ docker run -it alpine /bin/bash
 
 $ docker ps
 
@@ -146,17 +187,31 @@ https://docs.docker.com/engine/reference/commandline/run/
 
 ---
 
-## Next Slide
+## Docker Engine
 
-Note:
-- Presenter note
+<!-- .slide: data-transition="fade-in none-out" -->
+
+![](images/04.1-docker-engine.png)
+
+---
+
+## Docker Engine
+
+<!-- .slide: data-transition="none-in fade-out" -->
+
+![](images/04.2-docker-engine.png)
+
+---
+
+## Docker Engine
+
+<!-- .slide: data-transition="none-in fade-out" -->
+
+![](images/04.3-docker-engine.png)
 
 ---
 
 ## Reference Material
 
-- Link to convert/download PDF of the presentation
 
 ---
-
-## Thank You
