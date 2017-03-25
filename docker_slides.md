@@ -273,6 +273,7 @@ Note:
   - time - seconds to wait before sending SIGKILL
     - should be sufficient enough for container to gracefully shutdown (resource cleanup etc)
 - rm - cannot be undone
+
 -----
 
 ## Demo - Debugging
