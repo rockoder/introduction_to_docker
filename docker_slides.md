@@ -444,7 +444,18 @@ $ docker search alpine
 $ docker images
 $ docker pull alpine
 $ docker images
+$ wget rockoder.github.io/introduction_to_docker/demo_files/average.js
+$ wget rockoder.github.io/introduction_to_docker/demo_files/Dockerfile
+
 ```
+
+Note:
+- Dockerfile specifies list of instructions to build Docker image
+- Sharable, Reprocible and Automatable Process
+- Each line in Dockerfile is automic commit
+
+docker build .
+
 
 ---
 
