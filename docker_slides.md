@@ -316,6 +316,7 @@ Note:
   - Cannot run Windows base OS on Linux host
 - Falvor of Linux we pick, decide which libraries we can use
 - Base image - Ubuntu - this is pre-built image
+
 ---
 
 ## Docker Images
@@ -326,6 +327,7 @@ Note:
 
 Note:
 - install python
+
 ---
 
 ## Docker Images
@@ -336,6 +338,7 @@ Note:
 
 Note:
 - Flask - Python based web framework
+
 ---
 
 ## Docker Images
@@ -356,6 +359,7 @@ Note:
 ![](images/05.5-docker-image.png)
 Note:
 - Explicitly expose ports that needs to be available outside the contianer
+
 ---
 
 ## Docker Images
@@ -371,6 +375,7 @@ Note:
 - Can go back to any point and diverge
 - We reuse layers that dont change
 - Can name and tag any layer
+
 ---
 
 ## Docker Images
@@ -439,6 +444,7 @@ $ docker search alpine
 $ docker images
 $ docker pull alpine
 $ docker images
+
 ---
 
 ## Reference Material
