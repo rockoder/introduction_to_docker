@@ -444,6 +444,7 @@ $ docker search alpine
 $ docker images
 $ docker pull alpine
 $ docker images
+```
 
 ---
 
