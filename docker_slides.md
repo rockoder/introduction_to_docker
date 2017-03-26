@@ -23,7 +23,7 @@ Note:
   - Verbose as much as possible
 - We have lots to cover. Usually a 3 full day training is conducted.
 
----
+-----
 
 ### About Me
 
@@ -36,15 +36,15 @@ Note:
 
 ---
 
-## Long long time ago...
+### Long long time ago...
 
 <img width="400" border="5" src="images/01.1-physical.png"> <!-- .element: class="fragment" data-fragment-index="1" -->
 
 Physical <!-- .element: class="fragment" data-fragment-index="2" -->
 
----
+-----
 
-## Virtualization
+### Virtualization
 
 <img width="300" border="5" src="images/01.2-type1.png"> <!-- .element: class="fragment" data-fragment-index="1" -->
 <img width="300" border="5" src="images/01.3-type2.png"> <!-- .element: class="fragment" data-fragment-index="3" -->
@@ -93,7 +93,7 @@ Note:
 Note:
   - OS Level Virtualization
 
----
+-----
 
 ### Docker Internals - namespaces
 
@@ -101,7 +101,7 @@ Note:
 
 - namespaces - isolation of process tree, mounts, network, users, hostnames <!-- .element: class="fragment" data-fragment-index="1" -->
 
----
+-----
 
 ### Docker Internals - cgroups
 
@@ -112,7 +112,7 @@ Note:
 Note:
   - Control Groups
 
----
+-----
 
 ### Docker Internals - LXC
 
@@ -120,7 +120,7 @@ Note:
 - LXC is a userspace interface for the Linux kernel containment features <!-- .element: class="fragment" data-fragment-index="2" -->
 - Older Docker release was based on LXC <!-- .element: class="fragment" data-fragment-index="3" -->
 
----
+-----
 
 ### Docker Internals - runC
 
@@ -133,7 +133,7 @@ It includes all of the plumbing code used by Docker to interact with system feat
 
 ---
 
-## So What is Docker?
+### So What is Docker?
 
 - Abstraction on container engine <!-- .element: class="fragment" data-fragment-index="1" -->
 - Command line and HTTP API <!-- .element: class="fragment" data-fragment-index="2" -->
@@ -153,15 +153,15 @@ It includes all of the plumbing code used by Docker to interact with system feat
 ---
  -->
 
-## Docker Engine
+### Docker Engine
 
 <!-- .slide: data-transition="fade-in none-out" -->
 
 ![](images/04.1-docker-engine.png)
 
----
+-----
 
-## Docker Engine
+### Docker Engine
 
 <!-- .slide: data-transition="none-in fade-out" -->
 
@@ -170,9 +170,9 @@ It includes all of the plumbing code used by Docker to interact with system feat
 Note:
 - Client and Docker Host can be on different machines
 
----
+-----
 
-## Docker Engine
+### Docker Engine
 
 <!-- .slide: data-transition="none-in fade-out" -->
 
@@ -180,7 +180,7 @@ Note:
 
 ---
 
-## Docker Installation
+### Docker Installation
 
 ```bash
 $ sudo apt-get update
@@ -208,7 +208,7 @@ Note:
 
 -----
 
-## Additonal Configuration
+### Additonal Configuration
 
 ```bash
 $ sudo groupadd docker
@@ -222,7 +222,7 @@ $ sudo usermod -aG docker $USER
 ### Docker Registry or Docker Hub
 
 - Central repository for image discovery, distribution and change management <!-- .element: class="fragment" data-fragment-index="1" -->
-- <!-- .element: class="fragment" data-fragment-index="2" --> Public: [hub.docker.com](hub.docker.com)
+- <!-- .element: class="fragment" data-fragment-index="2" --> Public: [hub.docker.com](hub.docker.com) - create account
 - <!-- .element: class="fragment" data-fragment-index="3" --> Private: [hub.docker.hpecorp.net](hub.docker.hpecorp.net)
 
 Note:
@@ -230,7 +230,7 @@ Note:
 
 ---
 
-## First Container
+### First Container
 
 ```bash
 $ docker run alpine pwd
@@ -256,7 +256,7 @@ Note:
 
 -----
 
-## Detached Container
+### Detached Container
 
 ```bash
 $ docker run ubuntu
@@ -283,7 +283,7 @@ Note:
 
 -----
 
-## Configuration
+### Configuration
 
 ```bash
 $ docker run -e "STR1=HI" -e "STR2=BYE" ubuntu /bin/bash -c export
@@ -294,7 +294,7 @@ Note:
 
 -----
 
-## Container Lifecycle
+### Container Lifecycle
 
 ```bash
 $ docker run --name webapp training/webapp
@@ -320,7 +320,7 @@ Note:
 
 -----
 
-## Container Debugging
+### Container Debugging
 
 ```bash
 $ docker run -d -P --name redis redis
@@ -337,9 +337,9 @@ Note:
 - Redis container is running redis as primary process.
   - use `exec` to run the bash in the already container as a secondary process
 
----
+-----
 
-## Docker Images
+### Docker Images
 
 - Using pre-built images is very useful <!-- .element: class="fragment" data-fragment-index="1" -->
 - You can also create your own images <!-- .element: class="fragment" data-fragment-index="2" -->
@@ -349,7 +349,7 @@ Note:
 
 ---
 
-## Docker Images
+### Docker Images
 
 <!-- .slide: data-transition="fade-in none-out" -->
 
@@ -361,9 +361,9 @@ Note:
 - Falvor of Linux we pick, decide which libraries we can use
 - Base image - Ubuntu - this is pre-built image
 
----
+-----
 
-## Docker Images
+### Docker Images
 
 <!-- .slide: data-transition="none-in fade-out" -->
 
@@ -372,9 +372,9 @@ Note:
 Note:
 - install python
 
----
+-----
 
-## Docker Images
+### Docker Images
 
 <!-- .slide: data-transition="none-in fade-out" -->
 
@@ -383,9 +383,9 @@ Note:
 Note:
 - Flask - Python based web framework
 
----
+-----
 
-## Docker Images
+### Docker Images
 
 <!-- .slide: data-transition="none-in fade-out" -->
 
@@ -394,9 +394,9 @@ Note:
 Note:
 - Add your app code
 
----
+-----
 
-## Docker Images
+### Docker Images
 
 <!-- .slide: data-transition="none-in fade-out" -->
 
@@ -404,9 +404,9 @@ Note:
 Note:
 - Explicitly expose ports that needs to be available outside the contianer
 
----
+-----
 
-## Docker Images
+### Docker Images
 
 <!-- .slide: data-transition="none-in fade-out" -->
 
@@ -422,7 +422,7 @@ Note:
 
 -----
 
-## Docker Images
+### Docker Images
 
 - Run Container - Change State - Save State <!-- .element: class="fragment" data-fragment-index="1" -->
 - Layer: Only difference is saved <!-- .element: class="fragment" data-fragment-index="2" -->
@@ -440,7 +440,7 @@ Note:
 
 -----
 
-## Docker Images
+### Docker Images
 
 <!-- .slide: data-transition="none-in fade-out" -->
 
@@ -450,7 +450,7 @@ Note:
 
 -----
 
-## Docker Images
+### Docker Images
 
 <!-- .slide: data-transition="none-in fade-out" -->
 
@@ -461,7 +461,7 @@ Note:
 
 -----
 
-## Docker Hub
+### Docker Hub
 
 ```bash
 $ docker pull rabbitmq
@@ -481,7 +481,7 @@ Note:
 
 -----
 
-## Docker Image
+### Docker Image
 
 ```bash
 $ docker search alpine
@@ -492,7 +492,7 @@ $ docker images
 
 -----
 
-## Dockerfile
+### Dockerfile
 
 ```Dockerfile
 FROM alpine
@@ -539,7 +539,7 @@ Note:
 
 -----
 
-## Sample Application
+### Sample Application
 
 ```Javascript
 var sum = 0;
@@ -557,7 +557,7 @@ console.log(sum / count);
 
 -----
 
-## Build Docker Image
+### Build Docker Image
 
 ```bash
 $ wget rockoder.github.io/introduction_to_docker/demo_files/ex1_images/average.js
@@ -575,7 +575,7 @@ Note:
 
 -----
 
-## Push Docker Image
+### Push Docker Image
 
 ```bash
 $ docker tag <image id> <dockerhub account name>/average:1.0
@@ -597,7 +597,7 @@ Note:
 
 ---
 
-## Docker Networking
+### Docker Networking
 
 ![](images/06-networking.png)
 
@@ -608,7 +608,7 @@ Note:
 
 -----
 
-## Docker Networking
+### Docker Networking
 
 ```bash
 $ docker network ls
@@ -627,7 +627,7 @@ Note:
 
 -----
 
-## Docker Networking
+### Docker Networking
 
 ```bash
 $ docker network create --driver bridge my-network
@@ -636,9 +636,10 @@ $ docker run -d --net my-network --name webapp training/webapp
 $ docker run alpine wget -qO- webapp:5000
 $ docker run --net my-network alpine wget -qO- webapp:5000
 ```
+
 ---
 
-## Docker Volumes
+### Docker Volumes
 
 - Stateless services <!-- .element: class="fragment" data-fragment-index="1" -->
   - Don't save any persistent state <!-- .element: class="fragment" data-fragment-index="2" -->
@@ -649,7 +650,7 @@ $ docker run --net my-network alpine wget -qO- webapp:5000
 
 -----
 
-## Docker Volumes
+### Docker Volumes
 
 ```bash
 $ docker run -d -p 5984:5984 \
@@ -675,7 +676,7 @@ Note:
 
 ---
 
-## Docker Compose
+### Docker Compose
 
 ![](images/07-compose.png)
 
@@ -685,7 +686,7 @@ Note:
 - Helps in container orchestration
 - Helps in running the containers in correct order
 
----
+-----
 
 ### Docker Compose - Installation
 
@@ -700,9 +701,9 @@ $ docker-compose --version
 
 [Docker Compose Installation](https://docs.docker.com/compose/install/)
 
----
+-----
 
-## Docker Compose
+### Docker Compose - Example
 
 ```yaml
 version: "2"
@@ -721,9 +722,9 @@ Note:
 - kv-store-1 - container name
 - attributes - options of the docker run command
 
----
+-----
 
-## Docker Compose
+### Docker Compose - Example
 
 ```bash
 $ wget rockoder.github.io/introduction_to_docker/demo_files/ex2_compose/docker-compose.yml
@@ -738,15 +739,15 @@ Note:
 - Helpful when we run multiple containers
 - `-d` for detached mode. Will restart the stopped containers
 
----
+-----
 
-## Docker Compose - ELK Stack
+### Docker Compose - ELK Stack
 
 ![](images/07-elk-stack.png)
 
----
+-----
 
-## Docker Compose - ELK Stack
+### Docker Compose - ELK Stack
 
 ```yaml
 version: '2'
@@ -772,9 +773,9 @@ services:
 
 [download](demo_files/ex3_elk/docker-compose.yml)
 
----
+-----
 
-## Docker Compose - ELK Stack
+### Docker Compose - ELK Stack
 
 ```bash
 docker-compose up -d
@@ -797,7 +798,7 @@ Note:
 - `docker init` makes the Docker Engine run in swarm mode
   - has built in key-value store
 
----
+-----
 
 ### Docker Swarm - Creation
 
@@ -815,7 +816,7 @@ $ docker info
 $ docker node ls
 ```
 
----
+-----
 
 ### Docker Swarm - Service Creation
 
@@ -830,7 +831,7 @@ $ docker service ls
 $ docker ps
 ```
 
----
+-----
 
 ### Docker Swarm - Service Scale
 
@@ -845,7 +846,7 @@ $ docker service ps helloworld
 $ docker ps
 ```
 
----
+-----
 
 ### Docker Swarm - Service Deletion
 
@@ -855,7 +856,7 @@ $ docker service rm helloworld
 $ docker node ls
 ```
 
----
+-----
 
 ### Docker Swarm - Deletion
 
@@ -873,7 +874,7 @@ $ docker swarm leave --force
 
 ---
 
-## Kubernetes
+### Kubernetes
 
 <img width="500" src="images/09-k8s.png">
 
@@ -883,10 +884,11 @@ Note:
 
 ---
 
-## Reference Material
+### Reference Material
 
 1. [Learing Docker](https://www.safaribooksonline.com/library/view/learning-docker)
 1. https://docs.docker.com/
 1. https://linuxcontainers.org/
 1. https://wiki.gentoo.org/wiki/LXC
 1. https://www.toptal.com/linux/separation-anxiety-isolating-your-system-with-linux-namespaces
+1. http://docker-saigon.github.io/post/Docker-Internals/
