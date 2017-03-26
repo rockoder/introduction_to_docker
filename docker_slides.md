@@ -512,8 +512,8 @@ console.log(sum / count);
 ## Demo - Build Docker Image
 
 ```bash
-$ wget rockoder.github.io/introduction_to_docker/demo_files/average.js
-$ wget rockoder.github.io/introduction_to_docker/demo_files/Dockerfile
+$ wget rockoder.github.io/introduction_to_docker/demo_files/ex1_images/average.js
+$ wget rockoder.github.io/introduction_to_docker/demo_files/ex1_images/Dockerfile
 $ docker build -t rockoder/average .
 $ docker run rockoder/average 2 3 4
 ```
@@ -628,14 +628,69 @@ Note:
 
 ## Docker Compose
 
-- Another tool in the Docker ecosystem
-- Helps in container orchestration
-- Compose is a document defining containers and their relationships
+- Another tool in the Docker ecosystem <!-- .element: class="fragment" data-fragment-index="6" -->
+- Helps in container orchestration <!-- .element: class="fragment" data-fragment-index="6" -->
+- Document defining containers and their relationships <!-- .element: class="fragment" data-fragment-index="6" -->
+
+Note:
+- Helps in running the containers in correct order
+
+---
+
+### Docker Compose - Installation
+
+```bash
+$ sudo -i
+$ curl -L "https://github.com/docker/compose/releases/download/1.11.2/docker-compose-$(uname -s)-$(uname -m)" \
+  -o /usr/local/bin/docker-compose
+$ chmod +x /usr/local/bin/docker-compose
+$ exit
+$ docker-compose --version
+```
+
+[Docker Compose Installation](https://docs.docker.com/compose/install/)
 
 ---
 
 ## Docker Compose
 
+```yaml
+version: "2"
+services:
+  kv-store-1:
+    image: redis
+  kv-store-2:
+    image: redis
+```
+
+Note:
+- Docker Compose yaml specification version 2
+- services - list of containers
+- kv-store-1 - container name
+- attributes - options of the docker run command
+
+---
+
+## Docker Compose
+
+```bash
+$ wget rockoder.github.io/introduction_to_docker/demo_files/ex2_compose/docker-compose.yml
+$ docker-compose up
+$ docker-compose up -d
+$ docker-compose stop
+$ docker-compose rm
+```
+
+Note:
+- Notices the container name at each log line.
+- Helpful when we run multiple containers
+- `-d` for detached mode. Will restart the stopped containers
+
+---
+
+## Docker Compose - ELK Stack
+
+![](images/07-elk-stack.png)
 
 ---
 
