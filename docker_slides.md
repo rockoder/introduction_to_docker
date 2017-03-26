@@ -5,73 +5,66 @@ Mar 2017
 
 ---
 
-## Overview
+### Overview
 
-1. Part I - The Context
-1. Part II - The Details
-1. Part III - The Application
+1. Virtualization <!-- .element: class="fragment" data-fragment-index="1" -->
+1. Docker Architecture <!-- .element: class="fragment" data-fragment-index="2" -->
+1. Docker Containers and Images <!-- .element: class="fragment" data-fragment-index="3" -->
+1. Docker Networking and Volumes <!-- .element: class="fragment" data-fragment-index="4" -->
+1. Docker Compose and Swarm <!-- .element: class="fragment" data-fragment-index="5" -->
+1. Kubernetes <!-- .element: class="fragment" data-fragment-index="6" -->
 
 Note:
-- Slides and other material used in this training is shared online.
-  - Verbose as much as possible
-- We have lots to cover. Usually a 3 full day training is conducted.
 - The Context
   - Virtualization, Containers, Why now?
 - The Details
-  - Docker Details
-    - Virtualization
-    - Docker Architecture
-    - Docker Setup
-    - Docker Containers
-    - Docker Images
-    - Docker Volumes
-    - Docker Networking
-    - Docker Compose
-    - Docker Swarm
-    - Kubernetes
 - The Application
-  - What you could do?
+- Slides and other material used in this training is shared online.
+  - Verbose as much as possible
+- We have lots to cover. Usually a 3 full day training is conducted.
 
 ---
 
-## About Me
+### About Me
 
 - 12+ years in software engineering/architecture <!-- .element: class="fragment" data-fragment-index="1" -->
 - Masters in CS from University of Pune <!-- .element: class="fragment" data-fragment-index="2" -->
 - 1+ year in HPE - Cloud Optimizer <!-- .element: class="fragment" data-fragment-index="3" -->
 - Interested in Distributed Computing, Microservices, Containers and DevOps <!-- .element: class="fragment" data-fragment-index="4" -->
-- <!-- .element: class="fragment" data-fragment-index="5" --> [http://www.rockoder.com](http://www.rockoder.com)
+- <!-- .element: class="fragment" data-fragment-index="5" --> [https://rockoder.github.io/](https://rockoder.github.io/)
+- <!-- .element: class="fragment" data-fragment-index="6" --> [https://rockoder.github.io/introduction_to_docker](https://rockoder.github.io/introduction_to_docker)
+
+---
+
+## Long long time ago...
+
+<img width="400" border="5" src="images/01.1-physical.png"> <!-- .element: class="fragment" data-fragment-index="1" -->
+
+Physical <!-- .element: class="fragment" data-fragment-index="2" -->
 
 ---
 
 ## Virtualization
 
-<img width="300" border="5" src="images/01-type1.png"> <!-- .element: class="fragment" data-fragment-index="1" -->
-<img width="300" border="5" src="images/01-type2.png"> <!-- .element: class="fragment" data-fragment-index="2" -->
+<img width="300" border="5" src="images/01.2-type1.png"> <!-- .element: class="fragment" data-fragment-index="1" -->
+<img width="300" border="5" src="images/01.3-type2.png"> <!-- .element: class="fragment" data-fragment-index="3" -->
+<img width="300" border="5" src="images/01.4-container.png"> <!-- .element: class="fragment" data-fragment-index="5" -->
 
-- Type 1: ESXi, Xen   <!-- .element: class="fragment" data-fragment-index="3" -->
+- Type 1: ESXi, Xen   <!-- .element: class="fragment" data-fragment-index="2" -->
 - Type 2: VirtualBox, VMware Workstation <!-- .element: class="fragment" data-fragment-index="4" -->
+- Container Engine: Solaris Zones, LXC, Docker, Rocket <!-- .element: class="fragment" data-fragment-index="6" -->
 
 Note:
 - To better utilize hardware
 - To reduce cost
 
----
-
-### Virtual Machines vs Containers
-
-<img width="400" src="images/02.1-VM.png"> <!-- .element: class="fragment" data-fragment-index="1" -->
-<img width="400" src="images/02.2-Container.png"> <!-- .element: class="fragment" data-fragment-index="2" -->
-- Container Engine  <!-- .element: class="fragment" data-fragment-index="3" -->
-  - Solaris Zones, LXC, Docker, Rocket <!-- .element: class="fragment" data-fragment-index="3" -->
-
 -----
 
-### Virtual Machines vs Containers
+### VMs + Containers
 
-<img width="800" src="images/03-container-in-vm.png">
+<img width="800" src="images/03.1-container-in-vm.png">
 
-- Containers + VMs = Flexibility <!-- .element: class="fragment" data-fragment-index="1" -->
+- VMs + Containers = Flexibility <!-- .element: class="fragment" data-fragment-index="1" -->
 
 -----
 
@@ -91,19 +84,52 @@ Note:
 
 ---
 
-## Docker Internals
+### Docker Internals - chroot
+
+<img width="600" src="images/03.2-chroot.png">
 
 - chroot - changes current and root directory for a process <!-- .element: class="fragment" data-fragment-index="1" -->
-- namespaces - isolation of process tree, mounts, network, users, hostnames <!-- .element: class="fragment" data-fragment-index="2" -->
-- cgroups - isolates and limits resources like cpu, memory etc <!-- .element: class="fragment" data-fragment-index="3" -->
-
-- LXC - used by earlier Docker releases <!-- .element: class="fragment" data-fragment-index="4" -->
-- runC - Docker replaced LXC with runC <!-- .element: class="fragment" data-fragment-index="5" -->
 
 Note:
   - OS Level Virtualization
+
+---
+
+### Docker Internals - namespaces
+
+<img width="400" src="images/03.3-namespaces.png">
+
+- namespaces - isolation of process tree, mounts, network, users, hostnames <!-- .element: class="fragment" data-fragment-index="1" -->
+
+---
+
+### Docker Internals - cgroups
+
+<img width="500" src="images/03.4-cgroup.png">
+
+- cgroups - isolates and limits resources like cpu, memory etc <!-- .element: class="fragment" data-fragment-index="1" -->
+
+Note:
   - Control Groups
-  - LinuX Container
+
+---
+
+### Docker Internals - LXC
+
+- LinuX Containers <!-- .element: class="fragment" data-fragment-index="1" -->
+- LXC is a userspace interface for the Linux kernel containment features <!-- .element: class="fragment" data-fragment-index="2" -->
+- Older Docker release was based on LXC <!-- .element: class="fragment" data-fragment-index="3" -->
+
+---
+
+### Docker Internals - runC
+
+- runC is a lightweight, portable container runtime <!-- .element: class="fragment" data-fragment-index="1" -->
+- Used by Docker <!-- .element: class="fragment" data-fragment-index="2" -->
+- Contains all of the plumbing code used by Docker to interact with system features <!-- .element: class="fragment" data-fragment-index="3" -->
+
+Note:
+It includes all of the plumbing code used by Docker to interact with system features related to containers.
 
 ---
 
@@ -118,13 +144,14 @@ Note:
 
 ---
 
-## Why are containers so popular?
+<!-- ## Why are containers so popular?
 
 - Dev, QA, Prod - Story of a SaaS based e-commerce portal
 - No more: "It works on my machine"
 - Immutable containers
 
 ---
+ -->
 
 ## Docker Engine
 
@@ -139,6 +166,9 @@ Note:
 <!-- .slide: data-transition="none-in fade-out" -->
 
 ![](images/04.2-docker-engine.png)
+
+Note:
+- Client and Docker Host can be on different machines
 
 ---
 
@@ -167,7 +197,8 @@ $ sudo add-apt-repository \
 $ sudo apt-get update
 $ sudo apt-get install docker-ce
 ```
-- [Ubuntu Installation](https://docs.docker.com/engine/installation/linux/ubuntu/)
+
+[Ubuntu installation](https://docs.docker.com/engine/installation/linux/ubuntu/)
 
 Note:
 - If required, set http_proxy and https_proxy in /etc/environment file. Ex:
@@ -184,19 +215,22 @@ $ sudo groupadd docker
 $ sudo usermod -aG docker $USER
 ```
 
-- [Post install configuration](https://docs.docker.com/engine/installation/linux/linux-postinstall)
+[Post install configuration](https://docs.docker.com/engine/installation/linux/linux-postinstall)
 
 -----
 
-## Docker Hub
+### Docker Registry or Docker Hub
 
 - Central repository for image discovery, distribution and change management <!-- .element: class="fragment" data-fragment-index="1" -->
 - <!-- .element: class="fragment" data-fragment-index="2" --> Public: [hub.docker.com](hub.docker.com)
 - <!-- .element: class="fragment" data-fragment-index="3" --> Private: [hub.docker.hpecorp.net](hub.docker.hpecorp.net)
 
+Note:
+- Create account on hub.docker.com
+
 ---
 
-## Demo - First Container
+## First Container
 
 ```bash
 $ docker run alpine pwd
@@ -217,22 +251,24 @@ Note:
   - container has the own isolated view of the OS
 - this is a short lived container only to execute pwd command
 - to go inside the container use -i (interactive) -t (terminal)
+- easy to simulate a different distribution environment
+  - by just installing that userland software and pretending it's another distribution
 
 -----
 
-## Demo - Daemon Container
+## Detached Container
 
 ```bash
 $ docker run ubuntu
 $ docker run ubuntu ls
 $ docker run ubuntu ls -l
 $ docker run training/webapp
-$ docker run -p 80:5000 training/webapp
-$ docker run -d -p 80:5000 training/webapp
+$ docker run -p 5000:5000 training/webapp
+$ docker run -d -p 5000:5000 training/webapp
 $ docker ps
 $ docker logs <container id>
 $ docker stop <container id>
-$ docker run -d --name webapp -p 80:5000 training/webapp
+$ docker run -d --name webapp -p 5000:5000 training/webapp
 $ docker restart <container id>
 ```
 
@@ -247,7 +283,7 @@ Note:
 
 -----
 
-## Demo - Configuration
+## Configuration
 
 ```bash
 $ docker run -e "STR1=HI" -e "STR2=BYE" ubuntu /bin/bash -c export
@@ -258,7 +294,7 @@ Note:
 
 -----
 
-## Demo - Container Lifecycle
+## Container Lifecycle
 
 ```bash
 $ docker run --name webapp training/webapp
@@ -284,7 +320,7 @@ Note:
 
 -----
 
-## Demo - Debugging
+## Container Debugging
 
 ```bash
 $ docker run -d -P --name redis redis
@@ -425,16 +461,16 @@ Note:
 
 -----
 
-## Demo - Docker Hub
-
-[hub.docker.com](hub.docker.com) <!-- .element: class="fragment" data-fragment-index="1" -->
+## Docker Hub
 
 ```bash
 $ docker pull rabbitmq
 $ docker pull rabbitmq:3.6-management
 $ docker run -d -p 15672:15672 rabbitmq:3.6-management
 ```
-<!-- .element: class="fragment" data-fragment-index="2" -->
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+[hub.docker.com](hub.docker.com) <!-- .element: class="fragment" data-fragment-index="2" -->
 
 Note:
 - rabbitmq
@@ -445,7 +481,7 @@ Note:
 
 -----
 
-## Demo - Docker Image
+## Docker Image
 
 ```bash
 $ docker search alpine
@@ -456,7 +492,7 @@ $ docker images
 
 -----
 
-## Demo - Dockerfile
+## Dockerfile
 
 ```Dockerfile
 FROM alpine
@@ -493,6 +529,8 @@ ENTRYPOINT ["node","average.js"]
 ```
 <!-- .element: class="fragment" data-fragment-index="7" -->
 
+[download](demo_files/ex1_images/Dockerfile) <!-- .element: class="fragment" data-fragment-index="8" -->
+
 Note:
 - Dockerfile specifies list of instructions to build Docker image
 - Sharable, Reprocible and Automatable Process
@@ -501,7 +539,7 @@ Note:
 
 -----
 
-## Demo - Application
+## Sample Application
 
 ```Javascript
 var sum = 0;
@@ -515,9 +553,11 @@ process.argv.forEach(function (val, index, array) {
 console.log(sum / count);
 ```
 
+[download](demo_files/ex1_images/average.js) <!-- .element: class="fragment" data-fragment-index="1" -->
+
 -----
 
-## Demo - Build Docker Image
+## Build Docker Image
 
 ```bash
 $ wget rockoder.github.io/introduction_to_docker/demo_files/ex1_images/average.js
@@ -535,7 +575,7 @@ Note:
 
 -----
 
-## Demo - Push Docker Image
+## Push Docker Image
 
 ```bash
 $ docker tag <image id> <dockerhub account name>/average:1.0
@@ -546,6 +586,7 @@ $ docker push <dockerhub account name>/average
 ```
 
 ```bash
+# Login to private Docker registry
 $ docker login https://hub.docker.hpecorp.net
 ```
 <!-- .element: class="fragment" data-fragment-index="1" -->
@@ -638,11 +679,10 @@ Note:
 
 ![](images/07-compose.png)
 
-- Another tool in the Docker ecosystem <!-- .element: class="fragment" data-fragment-index="6" -->
-- Helps in container orchestration <!-- .element: class="fragment" data-fragment-index="6" -->
-- Document defining containers and their relationships <!-- .element: class="fragment" data-fragment-index="6" -->
-
 Note:
+- Another tool in the Docker ecosystem
+- Document defining containers and their relationships
+- Helps in container orchestration
 - Helps in running the containers in correct order
 
 ---
@@ -672,6 +712,8 @@ services:
   kv-store-2:
     image: redis
 ```
+
+[download](demo_files/ex2_compose/docker-compose.yml)
 
 Note:
 - Docker Compose yaml specification version 2
@@ -728,7 +770,7 @@ services:
       - elasticsearch
 ```
 
-[download](rockoder.github.io/introduction_to_docker/demo_files/ex3_elk/docker-compose.yml)
+[download](demo_files/ex3_elk/docker-compose.yml)
 
 ---
 
@@ -737,15 +779,15 @@ services:
 ```bash
 docker-compose up -d
 echo Hello Docker | nc localhost 5555
-```
 
-Open docker_host:5601 in browser
-  - click Create at bottom
-  - click Discover at top
+# Now to go host_ip:5601 in browser
+# Click Create button at the bottom
+# Click Discover at the top
+```
 
 ---
 
-## Docker Swarm
+### Docker Swarm
 
 ![](images/08-swarm.png)
 
@@ -757,43 +799,75 @@ Note:
 
 ---
 
-## Docker Swarm
+### Docker Swarm - Creation
 
 ```bash
+# node1 becomes the master
+$ docker swarm init --advertise-addr <node1_ip>
 
-docker swarm init --advertise-addr 104.198.79.80
+# on node2. node2 becomes the worker
+$ docker swarm join \
+  --token <token_from_above_command> \
+  <node1_ip>:2377
 
-swarm join \
-  --token SWMTKN-1-2a767ka1dolg8x3qoogjd7fh2vcgt766o2py7d7g94xsged47o-74l03ok2gf4ysc59pt9rklq70 \
-  104.198.79.80:2377
+# on master
+$ docker info
+$ docker node ls
+```
 
-docker info
-docker node ls
-docker service create --replicas 1 --name helloworld alpine ping docker.com
-docker service ls
+---
 
-# run on master and worker node
-docker ps
+### Docker Swarm - Service Creation
 
-docker service inspect --pretty helloworld
-docker service ps helloworld
-docker service scale helloworld=5
-docker service ps helloworld
+```bash
+# on master
+$ docker service create --replicas 1 \
+  --name helloworld alpine ping docker.com
 
-# run on master and worker node
-docker ps
+$ docker service ls
 
-docker service rm helloworld
+# on master and worker
+$ docker ps
+```
 
-docker node ls
+---
 
+### Docker Swarm - Service Scale
+
+```bash
+# on master
+$ docker service inspect --pretty helloworld
+$ docker service ps helloworld
+$ docker service scale helloworld=5
+$ docker service ps helloworld
+
+# run on master and worker
+$ docker ps
+```
+
+---
+
+### Docker Swarm - Service Deletion
+
+```bash
+# on master
+$ docker service rm helloworld
+$ docker node ls
+```
+
+---
+
+### Docker Swarm - Deletion
+
+```bash
 # on worker node
-docker swarm leave
+$ docker swarm leave
 
-docker node ls
+# on master
+$ docker node ls
 
 # on master, use only for single-node swarm
-docker swarm leave --force
+$ docker swarm leave --force
 
 ```
 
@@ -801,8 +875,18 @@ docker swarm leave --force
 
 ## Kubernetes
 
-![](images/09-k8s.png)
+<img width="500" src="images/09-k8s.png">
+
+Note:
+- Kubernetes is a powerful system, developed by Google, for managing containerized applications in a clustered environment.
+- It aims to provide better ways of managing related, distributed components across varied infrastructure.
 
 ---
 
 ## Reference Material
+
+1. [Learing Docker](https://www.safaribooksonline.com/library/view/learning-docker)
+1. https://docs.docker.com/
+1. https://linuxcontainers.org/
+1. https://wiki.gentoo.org/wiki/LXC
+1. https://www.toptal.com/linux/separation-anxiety-isolating-your-system-with-linux-namespaces
