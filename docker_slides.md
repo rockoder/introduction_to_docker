@@ -892,4 +892,5 @@ Note:
 1. https://wiki.gentoo.org/wiki/LXC
 1. https://www.toptal.com/linux/separation-anxiety-isolating-your-system-with-linux-namespaces
 1. http://docker-saigon.github.io/post/Docker-Internals/
+1. https://blog.selectel.com/containerization-mechanisms-namespaces/
 1. https://kubernetes.io/
