@@ -86,7 +86,7 @@ Note:
 
 ### Docker Internals - chroot
 
-<img width="600" src="images/03.2-chroot.png">
+<img width="400" src="images/03.2-chroot.png">
 
 - chroot - changes current and root directory for a process <!-- .element: class="fragment" data-fragment-index="1" -->
 
