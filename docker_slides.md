@@ -553,7 +553,7 @@ process.argv.forEach(function (val, index, array) {
 console.log(sum / count);
 ```
 
-[download](demo_files/ex1_images/average.js) <!-- .element: class="fragment" data-fragment-index="1" -->
+[download](demo_files/ex1_images/average.js)
 
 -----
 
@@ -778,8 +778,8 @@ services:
 ### Docker Compose - ELK Stack
 
 ```bash
-docker-compose up -d
-echo Hello Docker | nc localhost 5555
+$ docker-compose up -d
+$ echo Hello Docker | nc localhost 5555
 
 # Now to go host_ip:5601 in browser
 # Click Create button at the bottom
@@ -892,3 +892,4 @@ Note:
 1. https://wiki.gentoo.org/wiki/LXC
 1. https://www.toptal.com/linux/separation-anxiety-isolating-your-system-with-linux-namespaces
 1. http://docker-saigon.github.io/post/Docker-Internals/
+1. https://kubernetes.io/
