@@ -7,22 +7,30 @@ Mar 2017
 
 ## Overview
 
-1. OS Level Virtualization
-1. Docker Architecture
-1. Docker Setup
-1. Docker Containers
-1. Docker Images
-1. Docker Volumes
-1. Docker Networking
-1. Docker Compose
-1. Docker Swarm
-1. Kubernetes
-1. Reference Material
+1. Part I - The Context
+1. Part II - The Details
+1. Part III - The Application
 
 Note:
 - Slides and other material used in this training is shared online.
   - Verbose as much as possible
 - We have lots to cover. Usually a 3 full day training is conducted.
+- The Context
+  - Virtualization, Containers, Why now?
+- The Details
+  - Docker Details
+    - Virtualization
+    - Docker Architecture
+    - Docker Setup
+    - Docker Containers
+    - Docker Images
+    - Docker Volumes
+    - Docker Networking
+    - Docker Compose
+    - Docker Swarm
+    - Kubernetes
+- The Application
+  - What you could do?
 
 ---
 
@@ -628,6 +636,8 @@ Note:
 
 ## Docker Compose
 
+![](images/07-compose.png)
+
 - Another tool in the Docker ecosystem <!-- .element: class="fragment" data-fragment-index="6" -->
 - Helps in container orchestration <!-- .element: class="fragment" data-fragment-index="6" -->
 - Document defining containers and their relationships <!-- .element: class="fragment" data-fragment-index="6" -->
@@ -691,6 +701,107 @@ Note:
 ## Docker Compose - ELK Stack
 
 ![](images/07-elk-stack.png)
+
+---
+
+## Docker Compose - ELK Stack
+
+```yaml
+version: '2'
+services:
+  elasticsearch:
+    image: elasticsearch:2.2.1
+  kibana:
+    image: kibana:4.4.2
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
+  logstash:
+    image: logstash:2.2.2
+    command: -e 'input { tcp { port => 5555 } } output { elasticsearch { hosts => ["elasticsearch:9200"] } }'
+    ports:
+      - "5555:5555"
+    depends_on:
+      - elasticsearch
+```
+
+[download](rockoder.github.io/introduction_to_docker/demo_files/ex3_elk/docker-compose.yml)
+
+---
+
+## Docker Compose - ELK Stack
+
+```bash
+docker-compose up -d
+echo Hello Docker | nc localhost 5555
+```
+
+Open docker_host:5601 in browser
+  - click Create at bottom
+  - click Discover at top
+
+---
+
+## Docker Swarm
+
+![](images/08-swarm.png)
+
+Note:
+- Old diagram
+- Allows to run containers across group of Docker Hosts
+- `docker init` makes the Docker Engine run in swarm mode
+  - has built in key-value store
+
+---
+
+## Docker Swarm
+
+```bash
+
+docker swarm init --advertise-addr 104.198.79.80
+
+swarm join \
+  --token SWMTKN-1-2a767ka1dolg8x3qoogjd7fh2vcgt766o2py7d7g94xsged47o-74l03ok2gf4ysc59pt9rklq70 \
+  104.198.79.80:2377
+
+docker info
+docker node ls
+docker service create --replicas 1 --name helloworld alpine ping docker.com
+docker service ls
+
+# run on master and worker node
+docker ps
+
+docker service inspect --pretty helloworld
+docker service ps helloworld
+docker service scale helloworld=5
+docker service ps helloworld
+
+# run on master and worker node
+docker ps
+
+docker service rm helloworld
+
+docker node ls
+
+# on worker node
+docker swarm leave
+
+docker node ls
+
+# on master, use only for single-node swarm
+docker swarm leave --force
+
+```
+
+---
+
+## Kubernetes
+
+![](images/09-k8s.png)
 
 ---
 
