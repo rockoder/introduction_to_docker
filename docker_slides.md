@@ -63,7 +63,7 @@ Note:
 
 <img width="800" src="images/03-container-in-vm.png">
 
-- Containers and VMs used together provide a great deal of flexibility in deploying and managing apps. <!-- .element: class="fragment" data-fragment-index="1" -->
+- Containers + VMs = Flexibility <!-- .element: class="fragment" data-fragment-index="1" -->
 
 -----
 
@@ -376,7 +376,7 @@ Note:
 - We reuse layers that dont change
 - Can name and tag any layer
 
----
+-----
 
 ## Docker Images
 
@@ -394,7 +394,7 @@ Note:
   - Use Dockerfile
     - It lists instructions to be performed on the image to produce new layer
 
----
+-----
 
 ## Docker Images
 
@@ -404,7 +404,7 @@ Note:
 Note:
 - FROM, RUN are Docker instructions
 
----
+-----
 
 ## Docker Images
 
@@ -415,7 +415,7 @@ Note:
 - We can put this file in version control
 - Use it to create automated builds
 
----
+-----
 
 ## Demo - Docker Hub
 
@@ -435,26 +435,206 @@ Note:
   - tags - kind of version
     - latest - default tag
 
----
+-----
 
-## Demo - Build Docker Image
+## Demo - Docker Image
 
 ```bash
 $ docker search alpine
 $ docker images
 $ docker pull alpine
 $ docker images
-$ wget rockoder.github.io/introduction_to_docker/demo_files/average.js
-$ wget rockoder.github.io/introduction_to_docker/demo_files/Dockerfile
-
 ```
+
+-----
+
+## Demo - Dockerfile
+
+```Dockerfile
+FROM alpine
+```
+<!-- .element: class="fragment" data-fragment-index="1" --> 
+
+```Dockerfile
+MAINTAINER rickfast <rick.t.fast@gmail.com>
+```
+<!-- .element: class="fragment" data-fragment-index="2" -->
+
+```Dockerfile
+RUN apk update && apk add nodejs
+```
+<!-- .element: class="fragment" data-fragment-index="3" -->
+
+```Dockerfile
+RUN mkdir average
+```
+<!-- .element: class="fragment" data-fragment-index="4" -->
+
+```Dockerfile
+ADD average.js average/
+```
+<!-- .element: class="fragment" data-fragment-index="5" -->
+
+```Dockerfile
+WORKDIR average
+```
+<!-- .element: class="fragment" data-fragment-index="6" -->
+
+```Dockerfile
+ENTRYPOINT ["node","average.js"]
+```
+<!-- .element: class="fragment" data-fragment-index="7" -->
 
 Note:
 - Dockerfile specifies list of instructions to build Docker image
 - Sharable, Reprocible and Automatable Process
-- Each line in Dockerfile is automic commit
+- Entrypoint defines the main process that will be run within the container
+  - this is the pid 1
 
-docker build .
+-----
+
+## Demo - Application
+
+```Javascript
+var sum = 0;
+var count = 0;
+process.argv.forEach(function (val, index, array) {
+  if(index > 1) {
+    sum += parseInt(val);
+    count ++;
+  }
+});
+console.log(sum / count);
+```
+
+-----
+
+## Demo - Build Docker Image
+
+```bash
+$ wget rockoder.github.io/introduction_to_docker/demo_files/average.js
+$ wget rockoder.github.io/introduction_to_docker/demo_files/Dockerfile
+$ docker build -t rockoder/average .
+$ docker run rockoder/average 2 3 4
+```
+
+Note:
+- ensure you are in a clean empty directory to fire wget
+- `docker build` creates container from base images
+- and executes instruction in the container and saves to a image layer
+- Each line in Dockerfile is automic commit
+- No need to mention the Entrypoint process in the docker run command
+
+-----
+
+## Demo - Push Docker Image
+
+```bash
+$ docker tag <image id> <dockerhub account name>/average:1.0
+$ docker tag <image id> <dockerhub account name>/average:latest
+$ docker images
+$ docker login
+$ docker push <dockerhub account name>/average
+```
+
+```bash
+$ docker login https://hub.docker.hpecorp.net
+```
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+Note:
+- Same image can have multiple tags
+- Push and check on hub.docker.com
+
+---
+
+## Docker Networking
+
+![](images/06-networking.png)
+
+Note:
+- An app can consist of multiple containers like web server, cache, db etc
+- These containers need to run on the same network to interact with each other
+- They way containers are isolated, networks can also be isolated
+
+-----
+
+## Docker Networking
+
+```bash
+$ docker network ls
+$ ifconfig
+$ docker run -d -P --name default-network training/webapp
+  $ ifconfig
+$ docker run -d -P --net none --name no-network training/webapp
+  $ ifconfig
+$ docker run -d -P --net host --name host-network training/webapp
+  $ ifconfig
+```
+
+Note:
+- Docker by default runs three networks on the host
+- default is bridge
+
+-----
+
+## Docker Networking
+
+```bash
+$ docker network create --driver bridge my-network
+$ docker network ls
+$ docker run -d --net my-network --name webapp training/webapp
+$ docker run alpine wget -qO- webapp:5000
+$ docker run --net my-network alpine wget -qO- webapp:5000
+```
+---
+
+## Docker Volumes
+
+- Stateless services <!-- .element: class="fragment" data-fragment-index="1" -->
+  - Don't save any persistent state <!-- .element: class="fragment" data-fragment-index="2" -->
+  - Remain portable and scalable <!-- .element: class="fragment" data-fragment-index="3" -->
+- Persistent state cannot be stored within container <!-- .element: class="fragment" data-fragment-index="4" -->
+  - Containers will come and go <!-- .element: class="fragment" data-fragment-index="5" -->
+- Data volumes are directories to store persistent data <!-- .element: class="fragment" data-fragment-index="6" -->
+
+-----
+
+## Docker Volumes
+
+```bash
+$ docker run -d -p 5984:5984 \
+  -v $(pwd)/data:/usr/local/var/lib/couchdb \
+  --name couchdb klaemo/couchdb:1.6
+$ curl -X PUT http://localhost:5984/db
+$ ls data/
+$ curl -H 'Content-Type: application/json' \
+  -X POST http://localhost:5984/db \
+  -d '{"value":"Hello Docker World!"}'
+$ curl http://localhost:5984/db/<id>
+$ docker rm -f <couchdb container id>
+$ docker run -d -p 5984:5984 \
+  -v $(pwd)/data:/usr/local/var/lib/couchdb 
+  --name couchdb_new klaemo/couchdb:1.6
+$ curl http://localhost:5984/db/<id>
+```
+
+Note:
+- couchdb state is stored in external directory data/
+- Even if we remove the couchdb container the data will remain
+- Which can be used by the new couchdb container
+
+---
+
+## Docker Compose
+
+- Another tool in the Docker ecosystem
+- Helps in container orchestration
+- Compose is a document defining containers and their relationships
+
+---
+
+## Docker Compose
 
 
 ---
