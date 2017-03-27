@@ -52,11 +52,25 @@ Physical <!-- .element: class="fragment" data-fragment-index="2" -->
 
 - Type 1: ESXi, Xen   <!-- .element: class="fragment" data-fragment-index="2" -->
 - Type 2: VirtualBox, VMware Workstation <!-- .element: class="fragment" data-fragment-index="4" -->
-- Container Engine: Solaris Zones, LXC, Docker, Rocket <!-- .element: class="fragment" data-fragment-index="6" -->
+- Container Engine: Solaris Zones, Docker, Rocket <!-- .element: class="fragment" data-fragment-index="6" -->
 
 Note:
 - To better utilize hardware
 - To reduce cost
+- Containers - OS Virtualization
+- Differences
+  - Virtual Machines
+    - Full OS and application
+    - Heavy, Slow Provisioning (start/stop slow)
+    - Good Isolation
+    - Full blown OS
+    - Can Run Different Family of OS Than Host
+  - Containers
+    - Single process and its dependencies
+    - Light, Faster Provisioning (start/stop fast)
+    - Poorer Isolation
+    - Shared Kernel
+    - Need Same Family of OS 
 
 -----
 
@@ -65,22 +79,6 @@ Note:
 <img width="800" src="images/03.1-container-in-vm.png">
 
 - VMs + Containers = Flexibility <!-- .element: class="fragment" data-fragment-index="1" -->
-
------
-
-### Virtual Machines vs Containers
-
-- Virtual Machines
-  - Heavy, Slow Provisioning <!-- .element: class="fragment" data-fragment-index="1" -->
-  - Good Isolation <!-- .element: class="fragment" data-fragment-index="2" -->
-  - Can Run Different Family of OS Than Host<!-- .element: class="fragment" data-fragment-index="3" -->
-
-----------
-
-- Containers
-  - Light, Faster Provisioning <!-- .element: class="fragment" data-fragment-index="1" -->
-  - Poorer Isolation <!-- .element: class="fragment" data-fragment-index="2" -->
-  - Shared Kernel, Need Same Family of OS<!-- .element: class="fragment" data-fragment-index="3" -->
 
 ---
 
@@ -159,6 +157,11 @@ It includes all of the plumbing code used by Docker to interact with system feat
 
 ![](images/04.1-docker-engine.png)
 
+Note:
+- Actually a client/server application
+- docker binary accepts commands and send to Docker daemon
+  - via TCP Socket or HTTP
+
 -----
 
 ### Docker Engine
@@ -169,6 +172,7 @@ It includes all of the plumbing code used by Docker to interact with system feat
 
 Note:
 - Client and Docker Host can be on different machines
+- Docker Host exposes the HTTP API
 
 -----
 
@@ -177,6 +181,12 @@ Note:
 <!-- .slide: data-transition="none-in fade-out" -->
 
 ![](images/04.3-docker-engine.png)
+
+Note:
+- official registry is docker hub
+- contributed by 3rd party vendors, devs, docker
+- most app now has docker containers
+- the flow
 
 ---
 
@@ -213,6 +223,8 @@ Note:
 ```bash
 $ sudo groupadd docker
 $ sudo usermod -aG docker $USER
+
+# logout and login back for changes to apply
 ```
 
 [Post install configuration](https://docs.docker.com/engine/installation/linux/linux-postinstall)
@@ -233,8 +245,12 @@ Note:
 ### First Container
 
 ```bash
-$ docker run alpine pwd
-$ docker run -it alpine /bin/sh
+$ docker run ubuntu
+$ docker run ubuntu pwd
+$ pwd
+$ docker run ubuntu ls
+$ docker run ubuntu ls -l
+$ docker run -it ubuntu /bin/bash
     $ hostname
     $ ps -ef
     $ ls -l
@@ -246,11 +262,20 @@ $ docker rmi <image id>/<image name>
 ```
 
 Note:
+- container runs the single process identified with PID 1
+  - although other processes can run, container Lifecycle is tide with PID 1
+    - when PID 1 completes/dies, container stops/dies
+- default command to run at the start can be provided by default in the docker image
+- or user can provide a command to run at the start
+
+- docker run <image_name>
+
 - run command pulls the image if it is not locally present
+
 - container pwd output is different than the host pwd
   - container has the own isolated view of the OS
 - this is a short lived container only to execute pwd command
-- to go inside the container use -i (interactive) -t (terminal)
+- to go inside the container for some investigation, use -i (interactive) -t (terminal)
 - easy to simulate a different distribution environment
   - by just installing that userland software and pretending it's another distribution
 
@@ -259,9 +284,7 @@ Note:
 ### Detached Container
 
 ```bash
-$ docker run ubuntu
-$ docker run ubuntu ls
-$ docker run ubuntu ls -l
+$ docker run alpine pwd
 $ docker run training/webapp
 $ docker run -p 5000:5000 training/webapp
 $ docker run -d -p 5000:5000 training/webapp
@@ -290,7 +313,10 @@ $ docker run -e "STR1=HI" -e "STR2=BYE" ubuntu /bin/bash -c export
 ```
 
 Note:
-- Pass the configuration at launch time as environment variables
+- earlier we use to use configuration files
+- in docker the image is pre-baked
+- pass the configuration at launch time as environment variables
+- ex: jvm parameters etc
 
 -----
 
@@ -402,7 +428,8 @@ Note:
 
 ![](images/05.5-docker-image.png)
 Note:
-- Explicitly expose ports that needs to be available outside the contianer
+- Container acts like a machines in its own
+- So need to explicitly expose ports that needs to be available outside the contianer
 
 -----
 
@@ -467,6 +494,8 @@ Note:
 $ docker pull rabbitmq
 $ docker pull rabbitmq:3.6-management
 $ docker run -d -p 15672:15672 rabbitmq:3.6-management
+
+# open host_ip:15672 in browser
 ```
 <!-- .element: class="fragment" data-fragment-index="1" -->
 
@@ -489,6 +518,8 @@ $ docker images
 $ docker pull alpine
 $ docker images
 ```
+Note:
+- We will use alpine as our base image for our image
 
 -----
 
