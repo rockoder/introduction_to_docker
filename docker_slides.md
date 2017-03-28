@@ -428,7 +428,8 @@ Note:
 
 ![](images/05.5-docker-image.png)
 Note:
-- Explicitly expose ports that needs to be available outside the contianer
+- Container acts like a machines in its own
+- So need to explicitly expose ports that needs to be available outside the contianer
 
 -----
 
@@ -493,6 +494,8 @@ Note:
 $ docker pull rabbitmq
 $ docker pull rabbitmq:3.6-management
 $ docker run -d -p 15672:15672 rabbitmq:3.6-management
+
+# open host_ip:15672 in browser
 ```
 <!-- .element: class="fragment" data-fragment-index="1" -->
 
@@ -515,6 +518,8 @@ $ docker images
 $ docker pull alpine
 $ docker images
 ```
+Note:
+- We will use alpine as our base image for our image
 
 -----
 
